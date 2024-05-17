@@ -1,6 +1,6 @@
 # view (hux-assessment-backend)
 
-A simple web application that allows users to save video information
+A simple web application that allows users to save talent information
 
 ## Installation
 
