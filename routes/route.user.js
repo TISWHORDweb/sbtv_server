@@ -2,19 +2,19 @@
 let express = require('express');
 const { bodyGuard } = require('../middleware/middleware.protects');
 const { getUser } = require('../controllers/controller.user');
-const { createContact, getSingleContact, allContact, editContact, deleteContact } = require('../controllers/controller.contact');
+const { createVideo, getSingleVideo, allVideo, editVideo, deleteVideo } = require('../controllers/controller.video');
 let router = express.Router();
 
 
 //USER ROUTES
 router.get('/details', bodyGuard, getUser);
 
-//CONTACT ROUTES
-router.post('/contact/create', bodyGuard, createContact);
-router.put('/contact/edit', bodyGuard, editContact);
-router.delete('/contact/delete/:id', bodyGuard, deleteContact);
-router.get('/contact/all', bodyGuard, allContact);
-router.get('/contact/:id', bodyGuard, getSingleContact);
+//VIDEO ROUTES
+router.post('/video/create', bodyGuard, createVideo);
+router.put('/video/edit', bodyGuard, editVideo);
+router.delete('/video/delete/:id', bodyGuard, deleteVideo);
+router.get('/video/all', bodyGuard, allVideo);
+router.get('/video/:id', bodyGuard, getSingleVideo);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
