@@ -16,7 +16,7 @@ ModelVideo.init({
     vid: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
     title: {type: DataTypes.STRING, allowNull: false},
     description: {type: DataTypes.STRING},
-    url: {type: DataTypes.STRING, allowNull: false}
+    video: {type: DataTypes.STRING, allowNull: false}
 }, {sequelize, tableName});
 /**
  * Run belonging and relationship before sync()

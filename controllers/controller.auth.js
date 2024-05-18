@@ -11,8 +11,8 @@ const { useAsync, utils, errorHandle, } = require('./../core');
 /**
  * importing models
  */
-const { ModelUser } = require('./../models');
-const ModelAdmin = require('../models/model.admin');
+const { ModelUser, ModelAdmin } = require('./../models');
+const { checkMail } = require('../core/core.utils');
 /**
  * @type {function(*=, *=, *=): Promise<unknown>}
  */

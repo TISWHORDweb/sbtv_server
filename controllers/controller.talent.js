@@ -2,14 +2,12 @@ const dotenv = require("dotenv")
 dotenv.config()
 const Joi = require('joi');
 const { useAsync, utils, errorHandle, } = require('../core');
-const { ModelTalent } = require("../models");
 
 
-//KIN
 exports.createTalent = useAsync(async (req, res) => {
 
     try {
-
+        const uid = req.userId
         //create data if all data available
         const schema = Joi.object({
             url: Joi.string().required(),
@@ -20,6 +18,7 @@ exports.createTalent = useAsync(async (req, res) => {
 
         //validate user
         const value = await schema.validateAsync(req.body);
+        value.uid = uid
         const talent = await new ModelTalent(value)
 
         await talent.save().then(async () => {

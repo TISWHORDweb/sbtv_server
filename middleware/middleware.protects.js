@@ -13,7 +13,7 @@ exports.bodyParser = (req, res, next) => {
 
 //user body guard
 exports.bodyGuard = useAsync(async (req, res, next) => {
-    const rToken = req.headers['r-token'];
+    const rToken = req.headers['v-token'];
     if (!rToken) return res.status(400).json(utils.JParser("Unauthorized Access, Use a valid token and try again", false, []));
     const isValid = await ModelUser.findOne({where : { token: rToken }});
     if (isValid) {
@@ -42,7 +42,7 @@ exports.bodyGuard = useAsync(async (req, res, next) => {
 
 //admin body guard
 exports.adminBodyGuard = useAsync(async (req, res, next) => {
-    const rToken = req.headers['r-token'];
+    const rToken = req.headers['v-token'];
     if (!rToken) return res.status(400).json(utils.JParser("Unauthorized Access, Use a valid token and try again", false, []));
     const isValid = await ModelAdmin.findOne({where : { token: rToken }});
     if (isValid) {

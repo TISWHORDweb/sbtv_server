@@ -18,6 +18,7 @@ ModelTalent.init({
     name: {type: DataTypes.STRING},
     facebook: {type: DataTypes.STRING },
     tiktok: {type: DataTypes.STRING },
+    age: {type: DataTypes.INTEGER },
     youtube: {type: DataTypes.STRING },
     twitter: {type: DataTypes.STRING },
     snapchat: {type: DataTypes.STRING },

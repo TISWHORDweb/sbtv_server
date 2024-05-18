@@ -9,22 +9,16 @@ const { ModelVideo } = require("../models");
 exports.createVideo = useAsync(async (req, res) => {
 
     try {
+        const { video, title, description } = req.body
 
-        //create data if all data available
-        const schema = Joi.object({
-            url: Joi.string().required(),
-            title: Joi.string().min(3).max(150).required(),
-        })
-
-        const { url, title, description } = req.body;
+        if (!video || !title) return res.status(402).json(utils.JParser('Felds is required', false, []));
 
         //validate user
-        const value = await schema.validateAsync(req.body);
-        const video = await new ModelVideo(value)
+        const data = await ModelVideo.create(req.body)
 
-        await video.save().then(async () => {
-            return res.json(utils.JParser('Video created successfully', !!video, video));
-        })
+        if (data) {
+            return res.json(utils.JParser('Video created successfully', !!data, data));
+        }
 
     } catch (e) {
         throw new errorHandle(e.message, 400)
@@ -61,8 +55,8 @@ exports.editVideo = useAsync(async (req, res) => {
 
         const schema = Joi.object({
             id: Joi.number().required(),
-            name: Joi.string().min(3).max(150).optional(),
-            title: Joi.string().min(3).max(150).optional(),
+            url: Joi.string().min(3).optional(),
+            title: Joi.string().optional(),
             description: Joi.string().optional()
         })
 

@@ -9,6 +9,7 @@ let {errorHandle} = require('./core');
 
 let indexRouter = require('./routes/index');
 let authRouter = require('./routes/route.auth');
+let adminRouter = require('./routes/route.admin');
 let usersRouter = require('./routes/route.user');
 
 let app = express();
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/', indexRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/user', usersRouter);
+app.use('/api/v1/admin', adminRouter);
 //after all route, show 404
 app.use('*', (req, res)=>{
   throw new errorHandle("Resource not found", 404);

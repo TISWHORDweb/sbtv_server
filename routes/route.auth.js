@@ -5,13 +5,14 @@ const express = require('express');
 const router = express.Router();
 const CoreError = require('./../core/core.error');
 //load controller and utils
-const {index, authLogin, authRegister, authReset} = require('./../controllers/controller.auth');
+const {index, authLogin, authRegister, authReset, adminAuthRegister} = require('./../controllers/controller.auth');
 /**
  * auth routes
  */
 router.get('/', index);
 router.post('/login', bodyParser, authLogin);
 router.post('/register', bodyParser, authRegister);
+router.post('/admin/register', bodyParser, adminAuthRegister);
 /**
  * Export lastly
  */
