@@ -8,11 +8,11 @@ let router = express.Router();
 
 
 //USER ROUTES
-router.get('/details', bodyGuard, getUser);
+// router.get('/details', bodyGuard, getUser);
 
 //VIDEO ROUTES
 router.get('/video/all', allVideo);
-router.get('/video/:id', bodyGuard, getSingleVideo);
+router.get('/video/:id', getSingleVideo);
 
 //TALENT ROUTES
 router.post('/talent/create', bodyGuard, createTalent);
