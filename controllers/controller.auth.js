@@ -49,7 +49,9 @@ exports.authLogin = useAsync(async (req, res, next) => {
                     return res.json(utils.JParser('logged in successfuly', true, user));
                 })
             }
-        } 
+        } else {
+            return res.json(utils.JParser('Sorry theres no user with this email, Check and try again', false, []));
+        }
     } catch (e) {
         throw new errorHandle(e.message, 202);
     }
