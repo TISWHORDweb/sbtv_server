@@ -2,6 +2,7 @@ const dotenv = require("dotenv")
 dotenv.config()
 const Joi = require('joi');
 const { useAsync, utils, errorHandle, } = require('../core');
+const { ModelTalent, ModelUser } = require("../models");
 
 
 exports.createTalent = useAsync(async (req, res) => {
@@ -10,11 +11,16 @@ exports.createTalent = useAsync(async (req, res) => {
         const uid = req.userId
         //create data if all data available
         const schema = Joi.object({
-            url: Joi.string().required(),
-            title: Joi.string().min(3).max(150).required(),
+            name: Joi.string().required(),
+            tiktok: Joi.string().required(),
+            facebook: Joi.string().required(),
+            age: Joi.number().required(),
+            youtube: Joi.string().optional(),
+            twitter: Joi.string().optional(),
+            snapchat: Joi.string().optional()
         })
 
-        const { url, title, description } = req.body;
+        const { name, tiktok, facebook, age, youtube, twitter, snapchat } = req.body;
 
         //validate user
         const value = await schema.validateAsync(req.body);
@@ -34,12 +40,19 @@ exports.getSingleTalent = useAsync(async (req, res) => {
 
     try {
 
-        const vid = req.params.id
+        const tid = req.params.id
         const option = {
-            where: { vid }
+            where: { tid },
+            include: [ // Include the related user data
+            {
+                model: ModelUser,
+                as: 'user',
+                attributes: ['uid', 'name'],
+            },
+        ],
         }
 
-        const talent = await ModelTalent.findOne(option)
+        const talent = await ModelTalent.findOne(option);
 
         if (talent) {
             return res.json(utils.JParser('Talent fetch successfully', !!talent, talent));
@@ -93,7 +106,14 @@ exports.allTalent = useAsync(async (req, res) => {
         const talent = await ModelTalent.findAll({
             order: [
                 ['createdAt', 'DESC'],
-            ]
+            ],
+            include: [ // Include the related user data
+                {
+                    model: ModelUser,
+                    as: 'user',
+                    attributes: ['uid', 'name'],
+                },
+            ],
         });
         if (!talent) return res.status(402).json(utils.JParser('Talent not found', false, []));
         return res.json(utils.JParser('All talent fetch successfully', !!talent, talent));
@@ -104,10 +124,10 @@ exports.allTalent = useAsync(async (req, res) => {
 
 exports.deleteTalent = useAsync(async (req, res) => {
     try {
-        const vid = req.params.id
-        if (!vid) return res.status(402).json(utils.JParser('provide the patient id', false, []));
+        const tid = req.params.id
+        if (!tid) return res.status(402).json(utils.JParser('provide the patient id', false, []));
         const option = {
-            where: { vid }
+            where: { tid }
         }
         const talent = await ModelTalent.destroy(option)
         return res.json(utils.JParser('Patient deleted successfully', !!talent, []));
