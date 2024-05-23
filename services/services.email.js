@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const fs = require('fs');
 
 class MailTemple {
-    btnUrl = "https:// view.com";
+    btnUrl = "https:// sbtv.com";
     btnText = "Check classes";
     constructor(to) {
         this.to = to;

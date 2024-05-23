@@ -1,4 +1,4 @@
-# view (hux-assessment-backend)
+# sbtv (hux-assessment-backend)
 
 A simple web application that allows users to save talent information
 
@@ -36,4 +36,4 @@ Push to the branch: git push origin feature-branch
 Submit a pull request
 
 API Documentation
-The API documentation can be found `https://documenter.getpostman.com/view/34429800/2sA3Bq5r7R`.
+The API documentation can be found `https://documenter.getpostman.com/sbtv/34429800/2sA3Bq5r7R`.

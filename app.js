@@ -14,9 +14,9 @@ let usersRouter = require('./routes/route.user');
 
 let app = express();
 
-// view engine setup
+// sbtv engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('sbtv engine', 'ejs');
 
 //enable cross origin
 //set security guard
